@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contrata tu plan de Mundo Fútbol – streaming de fútbol en vivo." />
+  <title>Contratar – Mundo Fútbol</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-contratar">
+
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Balón de fútbol">
+            <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.8"/>
+            <polygon points="16,4 20.5,8.5 18,14 14,14 11.5,8.5" fill="currentColor" opacity="0.9"/>
+            <polygon points="27,12 24,17 20,16 18,14 20.5,8.5" fill="currentColor" opacity="0.6"/>
+            <polygon points="28,20 24,24 20,22 20,17 24,17" fill="currentColor" opacity="0.8"/>
+            <polygon points="16,28 13,24 14,22 20,22 22,25" fill="currentColor" opacity="0.7"/>
+            <polygon points="10,24 8,20 10,17 14,18 14,22" fill="currentColor" opacity="0.85"/>
+            <polygon points="4,20 5,14 8,12 10,17 8,20" fill="currentColor" opacity="0.65"/>
+            <polygon points="11.5,8.5 8,12 5,14 4,10 9,5" fill="currentColor" opacity="0.75"/>
+          </svg>
+        </span>
+        <span class="logo-text">Mundo<strong>Fútbol</strong></span>
+      </a>
+      <a href="index.html" class="btn btn-ghost btn-sm">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="10,2 4,8 10,14"/></svg>
+        Volver
+      </a>
+    </div>
+  </nav>
+
+  <!-- CONTRATAR MAIN -->
+  <main class="contratar-main">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="contratar-container">
+
+      <!-- INFO LATERAL -->
+      <aside class="contratar-aside animate-in" style="--d:0ms">
+        <div class="aside-tag">Actívate hoy</div>
+        <h1 class="aside-title">Empieza a <span class="gradient-text">disfrutar</span> el fútbol.</h1>
+        <p class="aside-sub">Cancela cuando quieras. Sin compromisos.</p>
+
+        <div class="aside-benefits">
+          <div class="benefit">
+            <span class="benefit-icon">
+              <!-- Lightning bolt -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </span>
+            <span>Activación inmediata</span>
+          </div>
+          <div class="benefit">
+            <span class="benefit-icon">
+              <!-- Lock -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </span>
+            <span>Pago 100% seguro</span>
+          </div>
+          <div class="benefit">
+            <span class="benefit-icon">
+              <!-- Target / No-permanence -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+            </span>
+            <span>Sin permanencia</span>
+          </div>
+          <div class="benefit">
+            <span class="benefit-icon">
+              <!-- TV / Monitor -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </span>
+            <span>En todos tus dispositivos</span>
+          </div>
+        </div>
+
+        <div class="aside-plan-preview" id="aside-plan-preview">
+          <span class="plan-chosen-label">Plan seleccionado</span>
+          <span class="plan-chosen-name" id="plan-display">Pro</span>
+        </div>
+      </aside>
+
+      <!-- FORMULARIO -->
+      <div class="form-wrapper animate-in" style="--d:150ms">
+        <form class="contratar-form" id="contratar-form" novalidate>
+
+          <div class="form-group" id="fg-nombre">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Santiago Sarmiento" autocomplete="name" />
+            <span class="form-error" id="err-nombre"></span>
+          </div>
+
+          <div class="form-group" id="fg-email">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" />
+            <span class="form-error" id="err-email"></span>
+          </div>
+
+          <div class="form-group" id="fg-plan">
+            <label for="plan">Elige tu plan</label>
+            <div class="select-wrapper">
+              <select id="plan" name="plan">
+                <option value="Base">Base – $9/mes</option>
+                <option value="Pro" selected>Pro – $19/mes</option>
+                <option value="Elite">Elite – $29/mes</option>
+              </select>
+            </div>
+            <span class="form-error" id="err-plan"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+            <span class="btn-text">Contratar ahora</span>
+            <span class="btn-spinner" hidden></span>
+          </button>
+
+        </form>
+
+        <!-- RESPUESTA JSON -->
+        <div class="json-panel" id="json-panel" hidden>
+          <div class="json-panel-header">
+            <span class="json-status" id="json-status-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;display:block">
+                <polyline points="3,10 7.5,15 17,5"/>
+              </svg>
+            </span>
+            <span id="json-status-text">Suscripción enviada correctamente</span>
+          </div>
+          <div class="json-label">Respuesta del servidor (HTTP POST)</div>
+          <pre class="json-output" id="json-output"></pre>
+          <button class="btn btn-ghost btn-sm btn-reset" id="reset-btn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="10,2 4,8 10,14"/></svg>
+            Volver al formulario
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script src="contratar.js"></script>
+</body>
+</html>
