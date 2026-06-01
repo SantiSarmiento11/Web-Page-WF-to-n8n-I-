@@ -88,7 +88,7 @@ form?.addEventListener('submit', async (e) => {
 
   try {
     // HTTP POST con fetch – mostramos la respuesta JSON tal como la imagen
-    const response = await fetch('https://httpbin.org/post', {
+    const response = await fetch('https://clarinet-paper-pledge.ngrok-free.dev/webhook-test/5423d564-cf44-4cb9-b8fe-5c6825bce53f', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
