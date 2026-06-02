@@ -93,7 +93,7 @@ form?.addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-
+    
     // Construimos el array de respuesta que coincide con el formato de la imagen
     const serverData = await response.json();
 
