@@ -1,0 +1,493 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// === Obtener datos con los nombres EXACTOS del Form Trigger ===\nconst inputData = $input.first().json;\n\n// 🔑 Nombres de campo según tu formulario en español\nconst plan = inputData['Elige tu plan'];\nconst email = $input.first().json.body.Email;\nconst nombre = $input.first().json.body['Nombre de usuario'];\n\n// Debug opcional: descomenta para ver en consola qué llega\n// console.log('Plan raw:', planRaw, 'Email:', email, 'Nombre:', nombre);\n\n// Normalización: minúsculas + trim para comparar seguro\nconst planNormalized = String(plan || '').trim().toLowerCase();\n\nconst config = {\n  'base':   { prefix: 'BASE', days: 30, display: 'Base' },\n  'extra':  { prefix: 'EXTA', days: 90, display: 'Extra' },\n  'deluxe': { prefix: 'DLX',  days: 365, display: 'Deluxe' }\n};\n\n// Lookup con fallback a Base\nconst selected = config[planNormalized] || config['base'];\n\n// Generar UUID único\nconst uuid = 'xxxxxxxx'.replace(/x/g, () =>\n  Math.floor(Math.random() * 16).toString(16)\n).toUpperCase();\n\nconst license = `LIC-${selected.prefix}-${uuid}`;\n\n// Calcular fecha de renovación\nconst today = new Date();\nconst renew = new Date(today);\nrenew.setDate(today.getDate() + selected.days);\n\nconsole.log(typeof(email));\n\n// === OUTPUT ===\nreturn [{\n  json: {\n    correo: email,\n    name: nombre,\n    plan: selected.display,           // \"Deluxe\" (formato legible)\n    license_key: license,             // Ej: LIC-DLX-A3F9D2E1\n    status: 'active',\n    next_renewal: renew.toISOString().split('T')[0],\n    days_valid: selected.days\n  }\n}];"
+      },
+      "id": "3747a7b8-ea51-4921-91b1-5f5195e9d7ad",
+      "name": "Code: Generar Licencia",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1152,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@dominio.com",
+        "toEmail": "={{ $('Webhook').item.json.body.Email }}",
+        "subject": "✅ Suscripción Activa",
+        "html": "=<p>¡Registro completado con éxito, {{ $('Webhook').item.json.body['Nombre de usuario'] }}!</p>\n<p>Tu licencia es: <strong>{{ $('Code: Generar Licencia').item.json.license_key }}</strong></p>\n<p>Para consultar tus días restantes y activar alertas, habla con nuestro bot: \n   <a href=\"https://t.me/MundoFutbolBot\">Abrir Telegram</a>\n</p>",
+        "options": {}
+      },
+      "id": "b1affcf6-bff2-476a-a65b-4df57d9cbba4",
+      "name": "Email: Confirmación",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1552,
+        256
+      ],
+      "webhookId": "955d389f-6758-4b10-9101-fd1127905121",
+      "credentials": {
+        "smtp": {
+          "id": "WzyGo5QT13X2iG37",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO subscriptions (email, nombre, plan, license_key, status, next_renewal) \nVALUES ($1, $2, $3, $4, $5, $6)",
+        "options": {
+          "queryReplacement": "={{ $json.correo }}, {{ $json.name }}, {{ $json.plan }}, {{ $json.license_key }}, {{ $json.status }}, {{ $json.next_renewal }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1360,
+        256
+      ],
+      "id": "b427d3d1-3c2e-403f-9bea-b95342ab5b20",
+      "name": "Query insert",
+      "credentials": {
+        "postgres": {
+          "id": "bNBGUfgJXt44NDjF",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5423d564-cf44-4cb9-b8fe-5c6825bce53f",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        576,
+        240
+      ],
+      "id": "2d7b2d58-87de-4c8e-89f9-81125834f936",
+      "name": "Webhook",
+      "webhookId": "5423d564-cf44-4cb9-b8fe-5c6825bce53f"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        752,
+        240
+      ],
+      "id": "34d6a950-958b-491d-b5a2-bef1bfea4692",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{ $json.message.chat.id }}",
+        "message": "👋 Hola! Por favor ingresa tu *correo electrónico* para buscar tu suscripción:",
+        "responseType": "freeText",
+        "options": {}
+      },
+      "id": "f3c4dc07-dcf5-4d1a-8f0a-ebec7d516837",
+      "name": "Pedir Correo1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        864,
+        704
+      ],
+      "webhookId": "ca51b802-2231-4a7a-af8d-0026a5eb5b26",
+      "credentials": {
+        "telegramApi": {
+          "id": "jXEa7XCddOGTL9wA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    id, \n    email, \n    plan, \n    status AS estado, \n    created_at AS fecha_inicio, \n    next_renewal AS fecha_fin \nFROM subscriptions \nWHERE email = '{{ $json.data.text }}' \nLIMIT 1;",
+        "options": {}
+      },
+      "id": "608e7054-f9e0-4618-9903-7fcf7f18835b",
+      "name": "Buscar Suscripción1",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1088,
+        688
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "bNBGUfgJXt44NDjF",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "condition_exists",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7831b8d6-1b78-408f-a8c7-d9f3c78e6f38",
+      "name": "¿Existe Suscripción?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        688
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.item.json;\n\nconst formatDate = (dateStr) => {\n  if (!dateStr) return 'N/A';\n  const d = new Date(dateStr);\n  return d.toLocaleDateString('es-CO', {\n    year: 'numeric',\n    month: 'long',\n    day: 'numeric'\n  });\n};\n\nconst today = new Date();\nconst fechaFin = item.fecha_fin ? new Date(item.fecha_fin) : null;\nconst diasRestantes = fechaFin\n  ? Math.ceil((fechaFin - today) / (1000 * 60 * 60 * 24))\n  : null;\n\nconst estadoEmoji = item.estado === 'activa' ? '✅' : '⚠️';\n\nconst mensaje =\n  `📋 *Detalle de tu suscripción*\\n\\n` +\n  `📧 Email: ${item.email}\\n` +\n  `📦 Plan: *${item.plan || 'N/A'}*\\n` +\n  `📅 Inicio: ${formatDate(item.fecha_inicio)}\\n` +\n  `📅 Vencimiento: ${formatDate(item.fecha_fin)}\\n` +\n  `${estadoEmoji} Estado: *${item.estado || 'desconocido'}*\\n` +\n  (diasRestantes !== null\n    ? `⏳ Días restantes: *${diasRestantes}*\\n`\n    : '') +\n  `\\n¿Deseas activar un recordatorio de renovación?\\n` +\n  `Responde *SI* o *NO*`;\n\n// Calcular fecha exacta para el recordatorio (7 días antes del vencimiento)\nconst fechaRecordatorio = fechaFin \n  ? new Date(fechaFin.getTime() - (7 * 24 * 60 * 60 * 1000)) \n  : null;\n\nreturn {\n  ...item,\n  mensaje_estado: mensaje,\n  dias_restantes: diasRestantes,\n  fecha_recordatorio: fechaRecordatorio ? fechaRecordatorio.toISOString().split('T')[0] : null\n};"
+      },
+      "id": "731da17e-a592-4a08-bf92-aa63e63bca49",
+      "name": "Formatear Estado1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1504,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger3').item.json.message.chat.id }}",
+        "text": "❌ No encontramos ninguna suscripción asociada a ese correo.\n\nVerifica que el correo sea correcto o contacta a soporte.",
+        "additionalFields": {}
+      },
+      "id": "f14d6e30-78e8-42da-87d0-0bec0addb903",
+      "name": "Aviso No Encontrada1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1504,
+        800
+      ],
+      "webhookId": "c390c667-cdd1-41ba-b645-dc8ff8bb32bb",
+      "credentials": {
+        "telegramApi": {
+          "id": "jXEa7XCddOGTL9wA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{ $('Telegram Trigger3').item.json.message.chat.id }}",
+        "message": "={{ $json.mensaje_estado }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "approveLabel": "✅ Si",
+            "disapproveLabel": "❌ No"
+          }
+        },
+        "options": {}
+      },
+      "id": "08f70c18-7384-49ba-bc86-0ed4dc070b13",
+      "name": "Mostrar Estado y Preguntar1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1696,
+        560
+      ],
+      "webhookId": "9197f6da-7b07-42c7-a888-5c53a3d5f0dc",
+      "credentials": {
+        "telegramApi": {
+          "id": "jXEa7XCddOGTL9wA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "condition_si",
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f2663dfb-d222-4470-885c-7a5745e6b573",
+      "name": "¿Respondió SI?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1888,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger3').item.json.message.chat.id }}",
+        "text": "✅ *¡Recordatorio activado!*\n\nTe avisaremos 7 días antes del vencimiento de tu suscripción. 🔔\n\n¡Hasta pronto!",
+        "additionalFields": {}
+      },
+      "id": "003de9ac-e8ad-42df-a3b6-20646a7ca450",
+      "name": "Confirmación1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2176,
+        480
+      ],
+      "webhookId": "1bab999d-cc65-4574-8b3f-1933dc436795",
+      "credentials": {
+        "telegramApi": {
+          "id": "jXEa7XCddOGTL9wA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger3').item.json.message.chat.id }}",
+        "text": "👍 Entendido, no activaremos ningún recordatorio.\n\n¡Recuerda revisar tu suscripción antes de que venza!",
+        "additionalFields": {}
+      },
+      "id": "c3a78fe1-164d-4a08-ab5a-7b86360677d5",
+      "name": "Sin Recordatorio1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2080,
+        816
+      ],
+      "webhookId": "269ea512-c84c-4c36-af93-63cb004b054d",
+      "credentials": {
+        "telegramApi": {
+          "id": "jXEa7XCddOGTL9wA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "id": "47a305e9-dc4a-4e27-b947-dd5ee8e173ae",
+      "name": "Telegram Trigger3",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        592,
+        592
+      ],
+      "webhookId": "telegram-webhook-001",
+      "credentials": {
+        "telegramApi": {
+          "id": "jXEa7XCddOGTL9wA",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Code: Generar Licencia": {
+      "main": [
+        [
+          {
+            "node": "Query insert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query insert": {
+      "main": [
+        [
+          {
+            "node": "Email: Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code: Generar Licencia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pedir Correo1": {
+      "main": [
+        [
+          {
+            "node": "Buscar Suscripción1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Suscripción1": {
+      "main": [
+        [
+          {
+            "node": "¿Existe Suscripción?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Existe Suscripción?1": {
+      "main": [
+        [
+          {
+            "node": "Formatear Estado1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Aviso No Encontrada1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Estado1": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Estado y Preguntar1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aviso No Encontrada1": {
+      "main": [
+        [
+          {
+            "node": "Pedir Correo1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mostrar Estado y Preguntar1": {
+      "main": [
+        [
+          {
+            "node": "¿Respondió SI?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Respondió SI?1": {
+      "main": [
+        [
+          {
+            "node": "Confirmación1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sin Recordatorio1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger3": {
+      "main": [
+        [
+          {
+            "node": "Pedir Correo1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9f54b2f2e8fbb7c9988da48fad307503209c22fc9257731a82a078f91b9f1afd"
+  }
+}
