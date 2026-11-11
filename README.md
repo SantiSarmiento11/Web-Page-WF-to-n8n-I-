@@ -165,3 +165,9 @@ Estructura enviada al webhook de n8n:
 | Metodo | URL | Payload de Entrada | Respuesta Esperada |
 | :--- | :--- | :--- | :--- |
 | `POST` | `/webhook/suscripcion-futbol` | Objeto JSON de suscripcion | `{"status": "OK", "mensaje": "Suscripcion procesada con exito"}` |
+
+### Manejo de Estados de Red y Validaciones
+
+- Validacion de correo electronico mediante expresion regular estandar antes de permitir el envio.
+- Deshabilitacion del boton de envio durante la peticion asincrona para prevenir envios duplicados.
+- Notificacion amigable en caso de perdida de conexion con el servidor.
