@@ -111,3 +111,11 @@ cd Web-Page-WF-to-n8n-I-
 ```bash
 docker run -it --rm --name n8n-streaming -p 5678:5678 n8nio/n8n
 ```
+
+### Importacion y Activacion del Flujo en n8n
+
+1. Acceder al panel de control de n8n en `http://localhost:5678`.
+2. Crear un nuevo flujo y hacer clic en **Import from File**.
+3. Seleccionar el archivo `Workflow.json` del repositorio.
+4. Configurar las credenciales del servicio de correo y persistencia.
+5. Activar el flujo (toggle en estado **Active**).
