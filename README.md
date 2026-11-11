@@ -219,3 +219,7 @@ El script emite registros estructurados en la consola para depuracion (`console.
 2. Crear una rama descriptiva (`git checkout -b feature/nuevo-metodo-pago`).
 3. Registrar cambios aplicando Conventional Commits (`git commit -m 'feat: adicionar selector de pasarela de pago PSE'`).
 4. Publicar la rama y abrir un Pull Request.
+
+## Autoria y Creditos del Proyecto
+
+Desarrollado y estructurado por [Santiago Sarmiento](https://github.com/SantiSarmiento11) integrando arquitectura web responsiva con automatizacion de flujos de trabajo en n8n.
