@@ -73,3 +73,8 @@ Desarrollado bajo una arquitectura ligera con enfoque en rendimiento de carga y 
 - ![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) Manipulacion del DOM y consumo asincrono de APIs mediante `fetch` nativo.
 - ![HTML5](https://img.shields.io/badge/HTML5_Semantic-E34F26?style=for-the-badge&logo=html5&logoColor=white) Estructura semantica optimizada para motores de busqueda (SEO).
 - ![CSS3](https://img.shields.io/badge/CSS3_Modern_UI-1572B6?style=for-the-badge&logo=css3&logoColor=white) Variables CSS, modo oscuro integrado y diseno adaptativo mobile-first.
+
+### Servicios y Recursos Multimedia
+
+- **Google Fonts (Inter)**: Tipografia clara y legible optimizada para plataformas transaccionales.
+- **SVG Graphics**: Iconografia vectorial ligera garantizando nitidez en cualquier resolucion de pantalla.
