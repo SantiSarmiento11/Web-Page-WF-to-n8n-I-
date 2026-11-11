@@ -89,3 +89,12 @@ Desarrollado bajo una arquitectura ligera con enfoque en rendimiento de carga y 
   - Safari 11+
   - Edge 79+
 - Servidor HTTP estatico para servir la aplicacion web.
+
+### Configuracion de Endpoints de Integracion (`contratar.js`)
+
+En `contratar.js`, definir la URL del Webhook de produccion de n8n:
+
+```javascript
+// URL del webhook de recepcion de contrataciones en n8n
+const N8N_WEBHOOK_URL = "http://localhost:5678/webhook/suscripcion-futbol";
+```
