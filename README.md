@@ -212,3 +212,10 @@ El script emite registros estructurados en la consola para depuracion (`console.
 | El formulario no envia los datos | URL de webhook en `contratar.js` no coincide | Actualizar `N8N_WEBHOOK_URL` con la URL correcta del flujo activo de n8n. |
 | Error CORS en la consola del navegador | Politicas de origen cruzado en n8n | Asegurarse de que el webhook de n8n acepte peticiones desde el origen de la pagina web. |
 | Los estilos no se aplican correctamente | Ruta relativa a `style.css` rota | Verificar que `style.css` se encuentre en la misma raiz que los archivos HTML. |
+
+## Guia de Contribucion
+
+1. Realizar un Fork del repositorio.
+2. Crear una rama descriptiva (`git checkout -b feature/nuevo-metodo-pago`).
+3. Registrar cambios aplicando Conventional Commits (`git commit -m 'feat: adicionar selector de pasarela de pago PSE'`).
+4. Publicar la rama y abrir un Pull Request.
