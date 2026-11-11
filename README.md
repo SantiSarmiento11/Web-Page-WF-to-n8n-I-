@@ -67,3 +67,9 @@ Desarrollado bajo una arquitectura ligera con enfoque en rendimiento de carga y 
 - ![n8n](https://img.shields.io/badge/n8n_Automation-EA4B71?style=for-the-badge&logo=n8n&logoColor=white) Plataforma de integracion y flujos de trabajo basada en eventos.
 - ![JSON Webhooks](https://img.shields.io/badge/JSON_Webhooks-02569B?style=for-the-badge&logo=postman&logoColor=white) Comunicacion asincrona desacoplada mediante endpoints HTTP.
 - ![REST API](https://img.shields.io/badge/REST_Protocols-0052CC?style=for-the-badge&logo=fastapi&logoColor=white) Estandares de intercambio de informacion basados en JSON.
+
+### Frontend y Experiencia de Usuario
+
+- ![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) Manipulacion del DOM y consumo asincrono de APIs mediante `fetch` nativo.
+- ![HTML5](https://img.shields.io/badge/HTML5_Semantic-E34F26?style=for-the-badge&logo=html5&logoColor=white) Estructura semantica optimizada para motores de busqueda (SEO).
+- ![CSS3](https://img.shields.io/badge/CSS3_Modern_UI-1572B6?style=for-the-badge&logo=css3&logoColor=white) Variables CSS, modo oscuro integrado y diseno adaptativo mobile-first.
