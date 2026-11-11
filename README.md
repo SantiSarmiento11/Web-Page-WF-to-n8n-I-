@@ -57,3 +57,7 @@ Web-Page-WF-to-n8n-I-/
 ├── Workflow.json        # Definicion exportable del flujo de trabajo automatizado en n8n
 └── README.md            # Documentacion tecnica de ingenieria del proyecto
 ```
+
+## Stack Tecnologico
+
+Desarrollado bajo una arquitectura ligera con enfoque en rendimiento de carga y fiabilidad de integracion.
