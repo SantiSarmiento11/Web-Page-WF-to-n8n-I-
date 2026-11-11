@@ -78,3 +78,14 @@ Desarrollado bajo una arquitectura ligera con enfoque en rendimiento de carga y 
 
 - **Google Fonts (Inter)**: Tipografia clara y legible optimizada para plataformas transaccionales.
 - **SVG Graphics**: Iconografia vectorial ligera garantizando nitidez en cualquier resolucion de pantalla.
+
+## Requisitos Previos del Sistema
+
+- Instancia de n8n activa (local o en la nube):
+  - Version minima recomendada: n8n 1.0+
+- Navegador web compatible con Fetch API y promesas asincronas:
+  - Chrome 60+
+  - Firefox 55+
+  - Safari 11+
+  - Edge 79+
+- Servidor HTTP estatico para servir la aplicacion web.
