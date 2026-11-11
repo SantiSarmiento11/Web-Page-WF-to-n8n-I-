@@ -19,3 +19,13 @@ En las plataformas de streaming de contenidos digitales y transmisiones deportiv
 - Integracion webhook en tiempo real con el motor de automatizacion n8n (`Workflow.json`).
 - Registro automatizado de nuevos suscriptores en base de datos o sistema CRM.
 - Despacho automatico de correos transaccionales con credenciales de acceso a las transmisiones.
+
+## Arquitectura del Sistema
+
+El proyecto implementa una arquitectura orientada a eventos (Event-Driven Architecture):
+1. Capa de Presentacion Web (`index.html`, `contratar.html`, `style.css`):
+   Landing page y embudo de contratacion responsivo optimizado para conversion.
+2. Capa de Logica de Cliente (`main.js`, `contratar.js`):
+   Captura de eventos, validacion de inputs, preparacion de cargas utiles JSON y envio asincrono via Fetch API.
+3. Capa de Orquestacion y Automatizacion (`Workflow.json` en n8n):
+   Receptor Webhook HTTP, normalizador de datos, persistencia de prospectos y emisor de notificaciones transaccionales.
