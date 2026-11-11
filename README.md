@@ -171,3 +171,9 @@ Estructura enviada al webhook de n8n:
 - Validacion de correo electronico mediante expresion regular estandar antes de permitir el envio.
 - Deshabilitacion del boton de envio durante la peticion asincrona para prevenir envios duplicados.
 - Notificacion amigable en caso de perdida de conexion con el servidor.
+
+## Estrategia de Pruebas y Aseguramiento de Calidad
+
+- Pruebas de carga util simulando envios de formulario mediante cURL.
+- Validacion de responsividad en emuladores de dispositivos moviles (iPhone, Pixel, iPad).
+- Auditoria de rendimiento y optimizacion SEO con Google Lighthouse.
