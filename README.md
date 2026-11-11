@@ -29,3 +29,18 @@ El proyecto implementa una arquitectura orientada a eventos (Event-Driven Archit
    Captura de eventos, validacion de inputs, preparacion de cargas utiles JSON y envio asincrono via Fetch API.
 3. Capa de Orquestacion y Automatizacion (`Workflow.json` en n8n):
    Receptor Webhook HTTP, normalizador de datos, persistencia de prospectos y emisor de notificaciones transaccionales.
+
+### Diagrama de Flujo Arquitectonico
+
+```mermaid
+flowchart TD
+    A[Fanatico Deportivo / Usuario] -->|Navegacion y Seleccion de Plan| B[Landing Page index.html]
+    B -->|Boton Contratar| C[Formulario de Suscripcion contratar.html]
+    C -->|Submit Formulario| D[Controlador Asincrono contratar.js]
+    D -->|POST JSON Webhook Payload| E[n8n Webhook Node]
+    E --> F[Nodo n8n Validacion y Sanitizacion de Datos]
+    F --> G[(Sistema de Persistencia / CRM / Google Sheets)]
+    F --> H[Nodo SMTP Envio de Credenciales de Acceso]
+    E -->|JSON Response 200 OK| D
+    D --> I[Modal de Confirmacion Exitosa en Pantalla]
+```
