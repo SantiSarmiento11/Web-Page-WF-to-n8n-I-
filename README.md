@@ -138,3 +138,9 @@ El embudo de conversion y activacion se ejecuta en 5 pasos:
 3. Diligencia sus datos de contacto y detalles de suscripcion.
 4. `contratar.js` intercepta el evento de envio, valida los campos y despacha la peticion HTTP a n8n.
 5. n8n procesa la contratacion y el usuario recibe confirmacion inmediata en pantalla y en su bandeja de entrada.
+
+### Experiencia de Usuario y Navegacion
+
+- Barra de navegacion superior fija con acceso rapido a Partidos, Planes y Contacto.
+- Seccion de Precios con tarjetas comparativas y llamados a la accion (CTA) destacados.
+- Formulario de contratacion estructurado con calculo automatico del total a pagar segun la periodicidad elegida (mensual o anual).
