@@ -177,3 +177,11 @@ Estructura enviada al webhook de n8n:
 - Pruebas de carga util simulando envios de formulario mediante cURL.
 - Validacion de responsividad en emuladores de dispositivos moviles (iPhone, Pixel, iPad).
 - Auditoria de rendimiento y optimizacion SEO con Google Lighthouse.
+
+### Prueba de Envio con cURL
+
+```bash
+curl -X POST http://localhost:5678/webhook/suscripcion-futbol \
+  -H "Content-Type: application/json" \
+  -d '{"nombre": "Prueba Usuario", "correo": "test@test.com", "planSeleccionado": "Basico"}'
+```
