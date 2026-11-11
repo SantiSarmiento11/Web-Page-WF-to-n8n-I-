@@ -11,3 +11,11 @@ Plataforma web de captacion de clientes y pasarela de suscripciones para transmi
 ## Resumen Ejecutivo
 
 En las plataformas de streaming de contenidos digitales y transmisiones deportivas en vivo, la conversion de prospectos depende criticamente de una experiencia de contratacion sin fricciones y una activacion instantanea del servicio. MundoFutbol resuelve esta necesidad mediante una arquitectura desacoplada que enlaza un portal publico de alta tasa de conversion con un motor de orquestacion en n8n, permitiendo procesar altas de clientes, validar planes seleccionados y disparar notificaciones de bienvenida sin intermediacion humana.
+
+## Alcance y Objetivos de Negocio
+
+- Exposicion visual clara de los planes de streaming disponibles (Plan Basico, Plan Premium, Plan Temporada Completa).
+- Formulario reactivo de contratacion con validacion dinamica del lado del cliente (`contratar.html`).
+- Integracion webhook en tiempo real con el motor de automatizacion n8n (`Workflow.json`).
+- Registro automatizado de nuevos suscriptores en base de datos o sistema CRM.
+- Despacho automatico de correos transaccionales con credenciales de acceso a las transmisiones.
