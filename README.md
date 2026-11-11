@@ -159,3 +159,9 @@ Estructura enviada al webhook de n8n:
   "fechaSolicitud": "2026-11-11T12:00:00Z"
 }
 ```
+
+### Contrato del Webhook HTTP
+
+| Metodo | URL | Payload de Entrada | Respuesta Esperada |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/webhook/suscripcion-futbol` | Objeto JSON de suscripcion | `{"status": "OK", "mensaje": "Suscripcion procesada con exito"}` |
