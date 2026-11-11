@@ -185,3 +185,7 @@ curl -X POST http://localhost:5678/webhook/suscripcion-futbol \
   -H "Content-Type: application/json" \
   -d '{"nombre": "Prueba Usuario", "correo": "test@test.com", "planSeleccionado": "Basico"}'
 ```
+
+## Telemetria y Tasa de Conversion
+
+El script emite registros estructurados en la consola para depuracion (`console.log`) y esta preparado para integrar herramientas de analitica de eventos como Google Tag Manager o Plausible Analytics.
