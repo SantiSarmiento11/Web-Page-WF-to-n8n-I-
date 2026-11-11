@@ -189,3 +189,8 @@ curl -X POST http://localhost:5678/webhook/suscripcion-futbol \
 ## Telemetria y Tasa de Conversion
 
 El script emite registros estructurados en la consola para depuracion (`console.log`) y esta preparado para integrar herramientas de analitica de eventos como Google Tag Manager o Plausible Analytics.
+
+## Consideraciones de Seguridad en Frontend
+
+- Proteccion contra envios automatizados no deseados.
+- Comunicacion obligatoria sobre HTTPS en entornos de produccion para salvaguardar los datos de suscripcion de los usuarios.
