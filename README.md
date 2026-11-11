@@ -119,3 +119,13 @@ docker run -it --rm --name n8n-streaming -p 5678:5678 n8nio/n8n
 3. Seleccionar el archivo `Workflow.json` del repositorio.
 4. Configurar las credenciales del servicio de correo y persistencia.
 5. Activar el flujo (toggle en estado **Active**).
+
+### Ejecucion del Portal Web
+
+Iniciar un servidor web ligero para desarrollo:
+```bash
+# Ejecutar desde la raiz del repositorio:
+python -m http.server 8080
+```
+
+Abrir la pagina en el navegador: `http://localhost:8080/index.html`
