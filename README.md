@@ -129,3 +129,12 @@ python -m http.server 8080
 ```
 
 Abrir la pagina en el navegador: `http://localhost:8080/index.html`
+
+## Funcionamiento del Sistema
+
+El embudo de conversion y activacion se ejecuta en 5 pasos:
+1. El usuario navega por `index.html` examinando las transmisiones de partidos de futbol disponibles y caracteristicas tecnicas (HD/4K, multicamara, sin publicidad).
+2. Elige un paquete y es redirigido a `contratar.html` con el plan preseleccionado.
+3. Diligencia sus datos de contacto y detalles de suscripcion.
+4. `contratar.js` intercepta el evento de envio, valida los campos y despacha la peticion HTTP a n8n.
+5. n8n procesa la contratacion y el usuario recibe confirmacion inmediata en pantalla y en su bandeja de entrada.
