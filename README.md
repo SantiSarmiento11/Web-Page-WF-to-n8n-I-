@@ -98,3 +98,16 @@ En `contratar.js`, definir la URL del Webhook de produccion de n8n:
 // URL del webhook de recepcion de contrataciones en n8n
 const N8N_WEBHOOK_URL = "http://localhost:5678/webhook/suscripcion-futbol";
 ```
+
+## Guia de Instalacion y Despliegue Local
+
+1. Clonar el repositorio localmente:
+```bash
+git clone https://github.com/SantiSarmiento11/Web-Page-WF-to-n8n-I-.git
+cd Web-Page-WF-to-n8n-I-
+```
+
+2. Levantar la instancia de n8n local mediante Docker:
+```bash
+docker run -it --rm --name n8n-streaming -p 5678:5678 n8nio/n8n
+```
