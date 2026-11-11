@@ -61,3 +61,9 @@ Web-Page-WF-to-n8n-I-/
 ## Stack Tecnologico
 
 Desarrollado bajo una arquitectura ligera con enfoque en rendimiento de carga y fiabilidad de integracion.
+
+### Backend y Orquestacion de Procesos
+
+- ![n8n](https://img.shields.io/badge/n8n_Automation-EA4B71?style=for-the-badge&logo=n8n&logoColor=white) Plataforma de integracion y flujos de trabajo basada en eventos.
+- ![JSON Webhooks](https://img.shields.io/badge/JSON_Webhooks-02569B?style=for-the-badge&logo=postman&logoColor=white) Comunicacion asincrona desacoplada mediante endpoints HTTP.
+- ![REST API](https://img.shields.io/badge/REST_Protocols-0052CC?style=for-the-badge&logo=fastapi&logoColor=white) Estandares de intercambio de informacion basados en JSON.
