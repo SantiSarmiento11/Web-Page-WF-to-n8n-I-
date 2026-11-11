@@ -199,3 +199,8 @@ El script emite registros estructurados en la consola para depuracion (`console.
 
 - **Landing Page**: Desplegable en GitHub Pages, Vercel o Netlify con entrega global a traves de CDN.
 - **Orquestador n8n**: Alojado en servidor privado virtual (VPS) con gestion de colas y ejecuciones persistentes.
+
+## Rendimiento y Tiempos de Respuesta
+
+- Hoja de estilos `style.css` minificada y optimizada.
+- Graficos vectoriales SVG incrustados para reducir el numero total de peticiones HTTP en la carga inicial.
