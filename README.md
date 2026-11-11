@@ -44,3 +44,16 @@ flowchart TD
     E -->|JSON Response 200 OK| D
     D --> I[Modal de Confirmacion Exitosa en Pantalla]
 ```
+
+### Estructura de Directorios
+
+```text
+Web-Page-WF-to-n8n-I-/
+├── index.html           # Landing page principal con catalogo de partidos y paquetes de suscripcion
+├── contratar.html       # Interfaz dedicada de suscripcion, datos personales y pago
+├── main.js              # Comportamiento general de la landing, navegacion y animaciones
+├── contratar.js         # Logica de validacion del formulario y conexion con Webhook n8n
+├── style.css            # Hoja de estilos moderna, paleta de colores deportivos y diseno responsivo
+├── Workflow.json        # Definicion exportable del flujo de trabajo automatizado en n8n
+└── README.md            # Documentacion tecnica de ingenieria del proyecto
+```
