@@ -194,3 +194,8 @@ El script emite registros estructurados en la consola para depuracion (`console.
 
 - Proteccion contra envios automatizados no deseados.
 - Comunicacion obligatoria sobre HTTPS en entornos de produccion para salvaguardar los datos de suscripcion de los usuarios.
+
+## Despliegue en Produccion
+
+- **Landing Page**: Desplegable en GitHub Pages, Vercel o Netlify con entrega global a traves de CDN.
+- **Orquestador n8n**: Alojado en servidor privado virtual (VPS) con gestion de colas y ejecuciones persistentes.
