@@ -144,3 +144,18 @@ El embudo de conversion y activacion se ejecuta en 5 pasos:
 - Barra de navegacion superior fija con acceso rapido a Partidos, Planes y Contacto.
 - Seccion de Precios con tarjetas comparativas y llamados a la accion (CTA) destacados.
 - Formulario de contratacion estructurado con calculo automatico del total a pagar segun la periodicidad elegida (mensual o anual).
+
+### Carga Util del Formulario (JSON Payload)
+
+Estructura enviada al webhook de n8n:
+```json
+{
+  "nombre": "Santiago Sarmiento",
+  "correo": "cliente@ejemplo.com",
+  "telefono": "+57 300 1234567",
+  "planSeleccionado": "Plan Temporada Completa",
+  "periodicidad": "Anual",
+  "metodoPago": "Tarjeta de Credito",
+  "fechaSolicitud": "2026-11-11T12:00:00Z"
+}
+```
